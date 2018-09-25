@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>structure之Stack | SheepVillage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据存储-栈从数据存储的角度看,数据将存储在items数组之中.123function Stack() &amp;#123;    var items = [];  // 使用数组存储数据&amp;#125;; 现在，这个类没有任何方法 栈的方法 push 添加一个元素到栈顶pop 弹出栈顶元素top 返回栈顶元素，注意，不是弹出isEmpty 判断栈是否为空size 返回栈里元素的个数clear 清空栈  栈的">
+  <meta name="description" content="数据存储-栈从数据存储的角度看,数据将存储在items数组之中.123function Stack() &amp;#123;    var items = [];  // 使用数组存储数据&amp;#125;; 现在，这个类没有任何方法 栈的方法 push 添加一个元素到栈顶pop 弹出栈顶元素top 返回栈顶元素，注意，不是弹出isEmpty 判断栈是否为空size 返回栈里元素的个数clear 清空栈">
 <meta name="keywords" content="structure,Stack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="structure之Stack">
 <meta property="og:url" content="http://yoursite.com/2018/09/22/structure之Stack/index.html">
 <meta property="og:site_name" content="SheepVillage">
-<meta property="og:description" content="数据存储-栈从数据存储的角度看,数据将存储在items数组之中.123function Stack() &amp;#123;    var items = [];  // 使用数组存储数据&amp;#125;; 现在，这个类没有任何方法 栈的方法 push 添加一个元素到栈顶pop 弹出栈顶元素top 返回栈顶元素，注意，不是弹出isEmpty 判断栈是否为空size 返回栈里元素的个数clear 清空栈  栈的">
+<meta property="og:description" content="数据存储-栈从数据存储的角度看,数据将存储在items数组之中.123function Stack() &amp;#123;    var items = [];  // 使用数组存储数据&amp;#125;; 现在，这个类没有任何方法 栈的方法 push 添加一个元素到栈顶pop 弹出栈顶元素top 返回栈顶元素，注意，不是弹出isEmpty 判断栈是否为空size 返回栈里元素的个数clear 清空栈">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T14:31:27.730Z">
+<meta property="og:updated_time" content="2018-09-25T14:55:38.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="structure之Stack">
-<meta name="twitter:description" content="数据存储-栈从数据存储的角度看,数据将存储在items数组之中.123function Stack() &amp;#123;    var items = [];  // 使用数组存储数据&amp;#125;; 现在，这个类没有任何方法 栈的方法 push 添加一个元素到栈顶pop 弹出栈顶元素top 返回栈顶元素，注意，不是弹出isEmpty 判断栈是否为空size 返回栈里元素的个数clear 清空栈  栈的">
+<meta name="twitter:description" content="数据存储-栈从数据存储的角度看,数据将存储在items数组之中.123function Stack() &amp;#123;    var items = [];  // 使用数组存储数据&amp;#125;; 现在，这个类没有任何方法 栈的方法 push 添加一个元素到栈顶pop 弹出栈顶元素top 返回栈顶元素，注意，不是弹出isEmpty 判断栈是否为空size 返回栈里元素的个数clear 清空栈">
   
     <link rel="alternative" href="/atom.xml" title="SheepVillage" type="application/atom+xml">
   
@@ -190,6 +190,7 @@
 <h3 id="栈的方法"><a href="#栈的方法" class="headerlink" title="栈的方法"></a>栈的方法</h3><blockquote>
 <p>push 添加一个元素到栈顶<br>pop 弹出栈顶元素<br>top 返回栈顶元素，注意，不是弹出<br>isEmpty 判断栈是否为空<br>size 返回栈里元素的个数<br>clear 清空栈</p>
 </blockquote>
+<a id="more"></a>
 <h3 id="栈的实现代码如下-myStack-js"><a href="#栈的实现代码如下-myStack-js" class="headerlink" title="栈的实现代码如下(myStack.js)"></a>栈的实现代码如下(myStack.js)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function Stack() &#123;</span><br><span class="line">	// 使用数组存储数据</span><br><span class="line">	let items = [];</span><br><span class="line">	// push方法向栈里压入一个元素</span><br><span class="line">	this.push = function(item)&#123;</span><br><span class="line">		items.push(item);</span><br><span class="line">	&#125;;</span><br><span class="line">	// pop方法把栈顶的元素弹出</span><br><span class="line">	this.pop = function()&#123;</span><br><span class="line">		return items.pop();</span><br><span class="line">	&#125;;</span><br><span class="line">	// top 方法返回栈顶元素</span><br><span class="line">	this.top = function()&#123;</span><br><span class="line">		return items[items.length - 1];</span><br><span class="line">	&#125;;</span><br><span class="line">	// isEmpty返回栈是否为空</span><br><span class="line">	this.isEmpty = function()&#123;</span><br><span class="line">		return items.length == 0;</span><br><span class="line">	&#125;;</span><br><span class="line">	// size方法返回栈的大小</span><br><span class="line">	this.size = function()&#123;</span><br><span class="line">		return items.length;</span><br><span class="line">	&#125;;</span><br><span class="line">	// clear 清空栈</span><br><span class="line">	this.clear = function()&#123;</span><br><span class="line">		items = [];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">exports.Stack = Stack;</span><br></pre></td></tr></table></figure>
 <h3 id="栈之应用"><a href="#栈之应用" class="headerlink" title="栈之应用"></a>栈之应用</h3><h4 id="1、使用栈，完成中序表达式转后续表达式"><a href="#1、使用栈，完成中序表达式转后续表达式" class="headerlink" title="1、使用栈，完成中序表达式转后续表达式"></a>1、使用栈，完成中序表达式转后续表达式</h4><p>思路分析:<br>定义数组result，用于存储后缀表达式，遍历中缀表达式，对每一个遍历到的元素做如处理:</p>
 <blockquote>
@@ -346,6 +347,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据存储-栈"><span class="toc-number">1.</span> <span class="toc-text">数据存储-栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈的方法"><span class="toc-number">2.</span> <span class="toc-text">栈的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈的实现代码如下-myStack-js"><span class="toc-number">3.</span> <span class="toc-text">栈的实现代码如下(myStack.js)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈之应用"><span class="toc-number">4.</span> <span class="toc-text">栈之应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、使用栈，完成中序表达式转后续表达式"><span class="toc-number">4.1.</span> <span class="toc-text">1、使用栈，完成中序表达式转后续表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、计算逆波兰表达式"><span class="toc-number">4.2.</span> <span class="toc-text">2、计算逆波兰表达式</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>

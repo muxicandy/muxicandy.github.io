@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/09/25/mvvm/mvvm2.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/25/mvvm/mvvm.png">
-<meta property="og:updated_time" content="2018-09-25T14:31:23.242Z">
+<meta property="og:updated_time" content="2018-09-25T14:55:58.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习vue之mvvm">
 <meta name="twitter:description" content="MVVM概念 MVVM分为三个部分：分别是M（Model，模型层 ），V（View，视图层），VM（ViewModel，V与M连接的桥梁，也可以看作为控制器） M：模型层，主要负责业务数据相关； V：视图层，顾名思义，负责视图相关，细分下来就是html+css层； VM：V与M沟通的桥梁，负责监听M或者V的修改，是实现MVVM双向绑定的要点；   数据就是简单的javascript对象,需要将数据">
@@ -196,7 +196,8 @@
 </ol>
 </li>
 <li>数据就是简单的javascript对象,需要将数据绑定到模板上。</li>
-<li>监听视图的变化,视图变化后通知数据更新,数据更新会再次导致视图的变化。<br><img src="/2018/09/25/mvvm/mvvm2.png" alt="理解配图"></li>
+<li>监听视图的变化,视图变化后通知数据更新,数据更新会再次导致视图的变化。<a id="more"></a>
+<img src="/2018/09/25/mvvm/mvvm2.png" alt="理解配图"></li>
 </ul>
 <h3 id="实现MVVM都要哪些"><a href="#实现MVVM都要哪些" class="headerlink" title="实现MVVM都要哪些"></a>实现MVVM都要哪些</h3><ul>
 <li>观察者(Watcher)</li>
@@ -373,6 +374,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM概念"><span class="toc-number">1.</span> <span class="toc-text">MVVM概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现MVVM都要哪些"><span class="toc-number">2.</span> <span class="toc-text">实现MVVM都要哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学着实现（Vue基础案例）"><span class="toc-number">3.</span> <span class="toc-text">学着实现（Vue基础案例）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#index-html-代码如下：（这里我们用了自己的MVVM库-这个库是用来整合所有板块的）"><span class="toc-number">3.1.</span> <span class="toc-text">index.html,代码如下：（这里我们用了自己的MVVM库,这个库是用来整合所有板块的）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MVVM构建"><span class="toc-number">3.2.</span> <span class="toc-text">MVVM构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模板编译compile-js"><span class="toc-number">3.3.</span> <span class="toc-text">模板编译compile.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据劫持observe-js"><span class="toc-number">3.4.</span> <span class="toc-text">数据劫持observe.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Watcher实现watcher-js"><span class="toc-number">3.5.</span> <span class="toc-text">Watcher实现watcher.js</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
