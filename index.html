@@ -52,7 +52,7 @@
 		  <h1 class="header-author"><a href="/">Sunny</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">记录成长</p>
+		<p class="header-subtitle">Everything is ok...</p>
 		
 
 		<nav class="header-menu">
@@ -110,7 +110,7 @@
 			  <h1 class="header-author js-header-author">Sunny</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>记录成长<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Everything is ok...<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -152,6 +152,91 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-kuayu" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/12/kuayu/">多种跨域方案总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/12/kuayu/" class="archive-article-date">
+  	<time datetime="2018-10-12T07:18:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="jsonp-只能发送get请求，不支持post-put-delete-不安全-xss攻击"><a href="#jsonp-只能发送get请求，不支持post-put-delete-不安全-xss攻击" class="headerlink" title="jsonp(只能发送get请求，不支持post put delete ,不安全 xss攻击)"></a>jsonp(只能发送get请求，不支持post put delete ,不安全 xss攻击)</h3><p>将服务器想要返回的数据，作为cb函数的参数返回给客户端<br>index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;	</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		function jsonp(&#123;url, params, cb&#125;) &#123;</span><br><span class="line">			return new Promise((resolve, reject)=&gt;&#123;</span><br><span class="line">				let script = document.createElement(&apos;script&apos;);</span><br><span class="line">				window[cb] = function (data) &#123;</span><br><span class="line">					resolve(data);</span><br><span class="line">					document.body.removeChild(script);</span><br><span class="line">				&#125;</span><br><span class="line">				//将params里边的参数解构出来跟cb函数拼接在一起 </span><br><span class="line">				params = &#123;...params,cb&#125;;//wd=cb&amp;cb=show</span><br><span class="line">				let arrs = [];</span><br><span class="line">				for(let key in params)&#123;</span><br><span class="line">					arrs.push(`$&#123;key&#125;=$&#123;params[key]&#125;`);</span><br><span class="line">				&#125;</span><br><span class="line">				script.src= `$&#123;url&#125;?$&#123;arrs.join(&apos;&amp;&apos;)&#125;`;</span><br><span class="line">				document.body.appendChild(script);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		//只能发送get请求，不支持post put delete ,不安全 xss攻击</span><br><span class="line">		jsonp(&#123;</span><br><span class="line">			url: &apos;http://localhost:3000/say&apos;,</span><br><span class="line">			params: &#123;wd: &apos;loveyou&apos;&#125;,</span><br><span class="line">			cb: &apos;show&apos;</span><br><span class="line">		&#125;).then(data=&gt; &#123;</span><br><span class="line">			console.log(data);</span><br><span class="line">		&#125;);</span><br><span class="line">	&lt;/script&gt;		</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用express模拟服务,server.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let express = require(&apos;express&apos;);</span><br><span class="line">let app = express();</span><br><span class="line"></span><br><span class="line">app.get(&apos;/say&apos;,function(req, res) &#123;</span><br><span class="line">	let &#123;wd, cb&#125; = req.query;</span><br><span class="line">	console.log(wd);//loveyou</span><br><span class="line">	console.log(cb);//show</span><br><span class="line">	//将服务器想要返回的数据，作为cb函数的参数返回给客户端</span><br><span class="line">	res.end(`$&#123;cb&#125;(&apos;loveyoutoo&apos;)`);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure></p>
+<h3 id="cors-后端设置访问权限"><a href="#cors-后端设置访问权限" class="headerlink" title="cors(后端设置访问权限)"></a>cors(后端设置访问权限)</h3><p>例服务1:server1.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let express = require(&apos;express&apos;);</span><br><span class="line">let app = express();</span><br><span class="line"></span><br><span class="line">app.use(express.static(__dirname));//当前目录的index.html作为访问路径</span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure></p>
+<p>服务2: server.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">let express = require(&apos;express&apos;);</span><br><span class="line">let app = express();</span><br><span class="line">let whiteList = [&apos;http://localhost:3000&apos;];</span><br><span class="line">app.use(function(req,res,next) &#123;</span><br><span class="line">	let origin = req.headers.origin;</span><br><span class="line">	if (whiteList.includes(origin)) &#123;</span><br><span class="line">		//设置允许哪个源可以访问</span><br><span class="line">		res.setHeader(&apos;Access-Control-Allow-Origin&apos;, origin);</span><br><span class="line">		//设置允许哪个头可以访问我</span><br><span class="line">		res.setHeader(&apos;Access-Control-Allow-Headers&apos;, &apos;name&apos;);</span><br><span class="line">		//设置允许可以访问的方法</span><br><span class="line">		res.setHeader(&apos;Access-Control-Allow-Methods&apos;, &apos;PUT&apos;);</span><br><span class="line">		//设置预解释的时间,间隔多少时间预解释一次</span><br><span class="line">		//返回结果可以用于缓存的最长时间，单位是秒。在Firefox中，上限是24小时 （即86400秒），而在Chromium 中则是10分钟（即600秒）。Chromium 同时规定了一个默认值 5 秒。</span><br><span class="line">		//如果值为 -1，则表示禁用缓存，每一次请求都需要提供预检请求，即用OPTIONS请求进行检测（即preflight请求-options）。</span><br><span class="line">		//注：需要注意的是Access-Control-Max-Age的设置针对完全一样的url，如果url加上路径参数，其中一个url的Access-Control-Max-Age设置对另一个url没有效果</span><br><span class="line">		res.setHeader(&apos;Access-Control-Max-Age&apos;, 6);</span><br><span class="line">		//设置允许cookie</span><br><span class="line">		res.setHeader(&apos;Access-Control-Allow-Credentials&apos;, true);</span><br><span class="line">		//允许返回的头</span><br><span class="line">		res.setHeader(&apos;Access-Control-Expose-Headers&apos;, &apos;name&apos;);</span><br><span class="line">		if (req.method === &apos;OPTIONS&apos;) &#123;</span><br><span class="line">			res.end(); // OPTIONS请求不做任何处理</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	next();</span><br><span class="line">&#125;);</span><br><span class="line">//对应put请求的时候</span><br><span class="line">app.put(&apos;/getData&apos;, function (req, res) &#123;</span><br><span class="line">	res.setHeader(&apos;name&apos;, &apos;yangyang&apos;);</span><br><span class="line">	res.end(&apos;返回的数据&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(&apos;/getData&apos;, function (req, res) &#123;</span><br><span class="line">	console.log(req.headers);</span><br><span class="line">	res.end(&apos;返回的数据&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">app.use(express.static(__dirname));</span><br><span class="line">app.listen(4000);</span><br></pre></td></tr></table></figure></p>
+<p>index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		let xhr = new XMLHttpRequest;</span><br><span class="line">		document.cookie = &apos;test=yang&apos;;</span><br><span class="line">		xhr.withCredentials = true;</span><br><span class="line">		// xhr.open(&apos;GET&apos;, &apos;http://localhost:4000/getData&apos;, true);</span><br><span class="line">		xhr.open(&apos;PUT&apos;, &apos;http://localhost:4000/getData&apos;, true);</span><br><span class="line">		//对应服务设置允许哪个头可以访问我</span><br><span class="line">		xhr.setRequestHeader(&apos;name&apos;, &apos;yangtest&apos;);</span><br><span class="line">		xhr.onreadystatechange = function() &#123;</span><br><span class="line">			if (xhr.readyState === 4) &#123;</span><br><span class="line">				if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status === 304)&#123;</span><br><span class="line">					console.log(xhr.response);</span><br><span class="line">					console.log(xhr.getResponseHeader(&apos;name&apos;));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		xhr.send();</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">跨域</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Study//" class="article-tag-list-link color1">Study</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-currying" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -507,89 +592,6 @@
 
 
   
-    <article id="post-clone" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/23/clone/">对象浅拷贝和深拷贝</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/23/clone/" class="archive-article-date">
-  	<time datetime="2018-09-23T12:18:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="对象引用、浅层拷贝与深层拷贝的区别"><a href="#对象引用、浅层拷贝与深层拷贝的区别" class="headerlink" title="对象引用、浅层拷贝与深层拷贝的区别"></a>对象引用、浅层拷贝与深层拷贝的区别</h3><p>下面代码中，使用了=进行赋值，于是b指向了a所指向的栈的对象，也就是a与b指向了同一个栈对象，所以在对b.name赋值时，a.name也发生了变化。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a = &#123;name:&apos;yang&apos;&#125;</span><br><span class="line">let b = a ;</span><br><span class="line">console.log(a===b); // true</span><br><span class="line">b.name = &apos;yangyang&apos;</span><br><span class="line">console.log(a.name); //yangyang</span><br></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2018/09/23/clone/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">topic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Study//" class="article-tag-list-link color1">Study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -687,15 +689,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">topic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dom-diff</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">跨域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">topic</a>
               </li>
              
               <li class="article-tag-list-item">
