@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="SheepVillage">
 <meta property="og:description" content="Redux和redux-thunk的源码解读笔记：Redux的使用总结：    1、习惯先写action。    2、写Reducer。    3、写显示组件。    4、写容器组件，将显示组件和容器组件connect起来。    5、入口文件中createStore，将reducer和store注入。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-27T07:29:56.448Z">
+<meta property="og:updated_time" content="2018-11-02T01:40:39.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux和redux-thunk源码解读">
 <meta name="twitter:description" content="Redux和redux-thunk的源码解读笔记：Redux的使用总结：    1、习惯先写action。    2、写Reducer。    3、写显示组件。    4、写容器组件，将显示组件和容器组件connect起来。    5、入口文件中createStore，将reducer和store注入。">
@@ -175,9 +175,13 @@
       
         <h3 id="Redux和redux-thunk的源码解读笔记："><a href="#Redux和redux-thunk的源码解读笔记：" class="headerlink" title="Redux和redux-thunk的源码解读笔记："></a>Redux和redux-thunk的源码解读笔记：</h3><p>Redux的使用总结：<br>    1、习惯先写action。<br>    2、写Reducer。<br>    3、写显示组件。<br>    4、写容器组件，将显示组件和容器组件connect起来。<br>    5、入口文件中createStore，将reducer和store注入。</p>
 <a id="more"></a>
-<p>Redux源码的src中包含：6个文件，分别是：index.js,createStore.js,compose.js,applyMiddleware.js,bindActionCreators.js,combineReducers.js下边根据我自己的理解分析一下redux的源码。<br>(一) index.js（整体组合返回了createStore，compose，applyMiddleware，bindActionCreators，combineReducers）<br>(二)createStore.js:<br>    createStore接受三个参数:<br>    <em>reducer：这个参数是一个函数，返回下一个state树
-    </em>preloadedState：preloadedState是初始的state<br>    *enhancer：第三个参数是一个store增强器，函数类型，只能使用’applyMiddleware’方法来生成<br>    这个方法最终生成一个对象，对象中包含了一个重要的成员变量，即State树<br>    暴露了几个成员方法:</p>
-<pre><code>* dispatch：redux中唯一触发state树修改的方法，分发一个action，然后在该action对应的处理函数中返回一个新的state树.
+<p>Redux源码的src中包含：6个文件，分别是：index.js,createStore.js,compose.js,applyMiddleware.js,bindActionCreators.js,combineReducers.js下边根据我自己的理解分析一下redux的源码。<br>(一) index.js（整体组合返回了createStore，compose，applyMiddleware，bindActionCreators，combineReducers）<br>(二)createStore.js:<br>    createStore接受三个参数:</p>
+<pre><code>* reducer：这个参数是一个函数，返回下一个state树
+* preloadedState：preloadedState是初始的state
+* enhancer：第三个参数是一个store增强器，函数类型，只能使用&apos;applyMiddleware&apos;方法来生成
+这个方法最终生成一个对象，对象中包含了一个重要的成员变量，即State树
+暴露了几个成员方法:
+* dispatch：redux中唯一触发state树修改的方法，分发一个action，然后在该action对应的处理函数中返回一个新的state树.
 * subscribe：给store的状态树添加监听函数，一旦dispatch被调用，所有的监听函数就会被执行.
 * getState：返回当前的状态树.
 * replaceReducer：替换当前store中reducer的方法.
@@ -372,7 +376,7 @@ createStore方法最终return了几个方法，通过闭包的原理，内部的
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Sunny
+    		&copy; 2021 Sunny
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
